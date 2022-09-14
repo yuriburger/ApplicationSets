@@ -67,8 +67,8 @@
                 iface eth0 inet static
                 address 192.168.177.240
                 netmask 255.255.255.0
-				gateway 192.168.177.1
-				dns-nameservers 192.168.177.1 8.8.8.8
+                gateway 192.168.177.1
+                dns-nameservers 192.168.177.1 8.8.8.8
 
     - name: Add host mappings to /etc/hosts
       blockinfile:
