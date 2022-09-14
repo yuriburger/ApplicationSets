@@ -60,15 +60,13 @@
     - name: Add static network settings
       blockinfile:
         dest: /etc/network/interfaces
-        regexp: '^source-directory'
+        insertafter: '^source'
         marker: "# {mark} ANSIBLE MANAGED BLOCK"
         block: |
                 auto eth0
                 iface eth0 inet static
                 address 10.1.10.240
                 netmask 255.255.255.0
-                gateway 10.1.10.1
-                dns-nameservers 10.1.10.1 8.8.8.8
 
     - name: Add host mappings to /etc/hosts
       blockinfile:
@@ -80,8 +78,6 @@
       - { name: pc0, ip: 10.1.10.240 }
       - { name: pc1, ip: 10.1.10.241 }
       - { name: pc2, ip: 10.1.10.242 }
-      - { name: pc3, ip: 10.1.10.243 }
-      - { name: pc4, ip: 10.1.10.244 }
 
     - name: Add our ansible hosts setup
       blockinfile:
@@ -89,11 +85,11 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK HOSTS"
         block: |
           # Ungrouped
-          pc[0:4]
+          pc[0:2]
 
           # cluster node
           [cluster]
-          pc[0:4]
+          pc[0:2]
 
           # master
           [master]
@@ -101,5 +97,5 @@
 
           # worker
           [worker]
-          pc[1:4]
+          pc[1:2]
 
